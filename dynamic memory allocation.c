@@ -1,0 +1,187 @@
+dynamic memory allocation:
+1)program for calloc
+
+#include <stdio.h>
+#include<stdlib.h>
+int main() {
+    int i,n;
+    int *array;
+    int sum=0;
+    printf("Enter the number of elements:");
+    scanf("%d",&n);
+    array=(int*)calloc(n,sizeof(int));
+    if (array== NULL){
+        printf("Memory not allocated\n");
+        return 0;
+    }else{
+    
+    printf("Memory allcated and the allocated memory is %d\n",n);
+    }
+    printf("enter %d numbers by adding a gap for each numbers \n",n);
+    for(i=0;i<n;i++){
+        scanf("%d",&array[i]);
+        sum+=array[i];
+        
+    }printf("The sum of all elements is: %d\n",sum);
+    free(array);
+    printf("memory deleted successfully");
+    return 0;
+}
+
+
+2) program for malloc 
+
+#include <stdio.h>
+#include<stdlib.h>
+int main() {
+    int i,n;
+    int *array;
+    int sum=0;
+    printf("Enter the number of elements:");
+    scanf("%d",&n);
+    array=(int*)malloc(n*sizeof(int));
+    if (array== NULL){
+        printf("Memory not allocated\n");
+        return 0;
+    }else{
+    
+    printf("Memory allcated and the allocated memory is %d\n",n);
+    }
+    printf("enter %d numbers by adding a gap for each numbers \n",n);
+    for(i=0;i<n;i++){
+        scanf("%d",&array[i]);
+        sum+=array[i];
+        
+    }printf("The sum of all elements is: %d\n",sum);
+    free(array);
+    printf("memory deleted successfully");
+    return 0;
+}
+
+3) program for realloc
+
+#include <stdio.h>
+#include<stdlib.h>
+int main() {
+    int i,n,newstrength;
+    int *array;
+    int sum=0;
+    printf("Enter the number of elements:");
+    scanf("%d",&n);
+    array=(int*)calloc(n,sizeof(int));
+    if (array== NULL){
+        printf("Memory not allocated\n");
+        return 0;
+    }else{
+    
+    printf("Memory allcated and the allocated memory is %d\n",n);
+    }
+    printf("Enter %d numbers by adding a gap for each numbers \n",n);
+    for(i=0;i<n;i++){
+        scanf("%d",&array[i]);
+        sum+=array[i];
+        
+    }
+    printf("Enter the new total size: ");
+    scanf("%d",&newstrength);
+    
+    array=(int*)realloc(array, newstrength*sizeof(int));
+    if(array==NULL){
+        printf("Memory allocation failed again \n");
+    }
+    printf("The sum of all elements is: %d\n",sum);
+    free(array);
+    printf("memory deleted successfully");
+    return 0;
+}
+
+
+task problem
+1)store and display stidents mark using dynamic memory allocation
+progrom:
+
+#include <stdio.h>
+#include<stdlib.h>
+int main() {
+  int sub,i;
+  int *mark;
+  printf("Enter the number of subjects: ");
+  scanf("%d",&sub);
+  
+  mark=(int*)malloc(sub*sizeof(int));
+  if(mark == NULL){
+      printf("Memory allocation failed.\n");
+      return 1;
+  }
+  printf("Enter marks for each subjects: \n");
+  for(i=0;i<sub;i++){
+      printf("subjects %d: ",i+1);
+      scanf("%d",&mark[i]);
+  }
+  printf("\n MARKS ENTERED \n");
+  for(i=0;i<sub;i++){
+      printf("Subjects %d: %d\n",i+1,mark[i]);
+      }
+      free(mark);
+      mark = NULL;
+  
+    return 0;
+}
+
+2) create a dynamic list of employee IDs and extend it
+program
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *empIDs;
+    int n, new_n, i;
+    printf("Enter initial number of employees: ");
+    scanf("%d", &n);
+
+    empIDs = (int*)calloc(n, sizeof(int));
+
+    if (empIDs == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    printf("\nInitial IDs (allocated with calloc): ");
+    for (i = 0; i < n; i++) {
+        printf("%d ", empIDs[i]);
+    }
+    printf("\n\nEnter %d employee IDs:\n", n);
+    for (i = 0; i < n; i++) {
+        printf("Employee %d: ", i + 1);
+        scanf("%d", &empIDs[i]);
+    }
+    printf("\nEnter the number of additional employees to add: ");
+    int extra;
+    scanf("%d", &extra);
+    new_n = n + extra;
+
+    empIDs = (int*)realloc(empIDs, new_n * sizeof(int));
+
+    if (empIDs == NULL) {
+        printf("Memory reallocation failed!\n");
+        return 1;
+    }
+    printf("Enter IDs for the %d new employees:\n", extra);
+    for (i = n; i < new_n; i++) {
+        printf("Employee %d: ", i + 1);
+        scanf("%d", &empIDs[i]);
+    }
+
+    printf("\nUpdated Employee ID List:\n");
+    for (i = 0; i < new_n; i++) {
+        printf("ID [%d]: %d\n", i + 1, empIDs[i]);
+    }
+
+    free(empIDs);
+    printf("\nMemory successfully freed. Goodbye!\n");
+
+    return 0;
+}
+
+
